@@ -23,6 +23,13 @@ class model{
         }
         return $this->myDataGet;
     }
+    public function search_user($palabra){
+        $consulta=$this->db->query("select * from usuarios where idUsuario like '".$palabra."%' or Nombre like '".$palabra."%' or Paterno like '".$palabra."%' or Materno like '".$palabra."%' or Departamento like '".$palabra."%'  ;");
+        while ($filas=$consulta->fetch_assoc()) {
+            $this->myDataGet[]=$filas;
+        }
+        return $this->myDataGet;
+    }
     public function add_user($cuenta,$nombre,$paterno,$materno,$departamento,$nivelDeConfianza,$email,$tel,$ext){        
         $consulta=$this->db->query("insert into usuarios values($cuenta,'$nombre','$paterno','$materno','$departamento','$nivelDeConfianza','$email','$tel','$ext');");
         if($consulta>0){
