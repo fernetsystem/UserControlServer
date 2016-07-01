@@ -16,6 +16,13 @@ class model{
         }
         return $this->myDataGet;
     }
+    public function get_equipos(){
+        $consulta=$this->db->query("select * from equipos t1 inner join usuarios t2 on t1.idusuario=t2.idusuario;");
+        while ($filas=$consulta->fetch_assoc()) {
+            $this->myDataGet[]=$filas;
+        }
+        return $this->myDataGet;
+    }
     public function add_user($cuenta,$nombre,$paterno,$materno,$departamento,$nivelDeConfianza,$email,$tel,$ext){        
         $consulta=$this->db->query("insert into usuarios values($cuenta,'$nombre','$paterno','$materno','$departamento','$nivelDeConfianza','$email','$tel','$ext');");
         if($consulta>0){

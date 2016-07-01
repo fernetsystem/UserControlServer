@@ -23,6 +23,12 @@ class controller{
         require_once 'views/usuarios.php';                           
         require_once 'views/footer.inc';
     }
+    public function listadoEquipos(){               
+        require_once 'views/header.inc';
+        $datosEquipos = $this->myModel->get_equipos();
+        require_once 'views/equipos.php';                           
+        require_once 'views/footer.inc';
+    }
     public function agregarUsuario(){            
        $datos = $this->myModel->add_user($_REQUEST['cuenta'],$_REQUEST['nombre'],$_REQUEST['paterno'],$_REQUEST['materno'],$_REQUEST['departamento'],$_REQUEST['nivelDeConfianza'],$_REQUEST['email'],$_REQUEST['tel'],$_REQUEST['ext']);
        if($datos > 0){
