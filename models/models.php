@@ -31,5 +31,13 @@ class model{
             return 0;
         }
     }    
+    public function add_equipo($marca,$modelo,$serie,$inv,$user,$hd,$ram,$procesador,$fechacompra,$fechagar){        
+        $consulta=$this->db->query("insert into equipos values(null,'$marca','$modelo','$serie','$inv',$user,'$hd','$ram','$procesador','$fechacompra','$fechagar');");
+        if($consulta>0){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 }
 ?>

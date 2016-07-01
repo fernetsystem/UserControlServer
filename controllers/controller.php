@@ -12,6 +12,13 @@ class controller{
     public function Index(){
         require_once 'views/main.php';               
     }
+
+    public function registrarEquipo(){
+        require_once 'views/header.inc';	
+        require_once 'views/registrarEquipo.php';        
+        require_once 'views/footer.inc';        
+    }
+    
     public function listadoUsuarios(){               
         $datosUsuarios = $this->myModel->get_usuarios();
         require_once 'views/usuarios.php';                           
@@ -49,6 +56,26 @@ class controller{
         $myController = new controller();
         $myController->listadoUsuarios();	
 
+	}
+    }
+    public function agregarEquipo(){        
+       $datos = $this->myModel->add_equipo($_REQUEST['marca'],$_REQUEST['modelo'],$_REQUEST['serie'],$_REQUEST['inv'],$_REQUEST['user'],$_REQUEST['hd'],$_REQUEST['ram'],$_REQUEST['procesador'],$_REQUEST['fechacompra'],$_REQUEST['fechagar']);
+       if($datos > 0){
+            require_once 'views/header.inc';
+            echo '<div class="container"><div class="alert alert-success fade in">'.
+                      '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.
+                       '<strong>Operacion exitosa!</strong> equipo registrado .'.
+                  '</div></div>';
+            $myController = new controller();
+            $myController->listadoEquipos();		
+	}else{
+        require_once 'views/header.inc';
+	echo '<div class="container"><div class="alert alert-danger fade in">'.
+                      '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.
+                       '<strong>ERROR!</strong> Ocurrio un error, intentelo de nuevo.'.
+                  '</div></div>';
+        $myController = new controller();
+        $myController->listadoEquipos();	
 	}
     }
 }
