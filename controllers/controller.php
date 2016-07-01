@@ -112,5 +112,27 @@ class controller{
         $myController->listadoUsuarios();	
 	}
     }
+    public function eliminarUsuario(){        
+        $datos = $this->myModel->delete_user($_REQUEST['cuenta']);
+        if($datos > 0){
+        require_once 'views/header.inc';    
+        echo '<div class="container"><div class="alert alert-success fade in">'.
+                      '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.
+                       '<strong>Operacion exitosa!</strong> Usuario eliminado .'.
+                  '</div></div>';            
+         $myController = new controller();
+        $myController->listadoUsuarios();	
+
+	}else{
+    require_once 'views/header.inc';
+	echo '<div class="container"><div class="alert alert-danger fade in">'.
+                      '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.
+                       '<strong>ERROR!</strong> Ocurrio un error, intentelo de nuevo.'.
+                  '</div></div>';
+         $myController = new controller();
+        $myController->listadoUsuarios();                   
+	}
+     
+    }
 }
 ?>
