@@ -19,6 +19,13 @@ class controller{
         require_once 'views/footer.inc';        
     }
     
+    public function registrarUsuario(){
+        require_once 'views/header.inc';	
+        require_once 'views/registrarUsuario.php';            
+        require_once 'views/footer.inc';        
+    }
+    
+
     public function listadoUsuarios(){               
         $datosUsuarios = $this->myModel->get_usuarios();
         require_once 'views/usuarios.php';                           
@@ -76,6 +83,33 @@ class controller{
                   '</div></div>';
         $myController = new controller();
         $myController->listadoEquipos();	
+	}
+    }
+    public function formEditarUsuario(){        
+        require_once 'views/header.inc';	        
+        $datosUsuario = $this->myModel->get_datos_user($_REQUEST['cuenta']);        
+        require_once 'views/editUser.php';	        
+        require_once 'views/footer.inc';
+    }
+    public function editarUsuario(){                
+        $datos = $this->myModel->update_user($_REQUEST['cuenta'],$_REQUEST['nombre'],$_REQUEST['paterno'],$_REQUEST['materno'],$_REQUEST['departamento'],$_REQUEST['nivelDeConfianza'],$_REQUEST['email'],$_REQUEST['tel'],$_REQUEST['ext']);        
+        if($datos > 0){
+        require_once 'views/header.inc';
+	echo '<div class="container"><div class="alert alert-success fade in">'.
+                      '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.
+                       '<strong>Operacion exitosa!</strong> cambios realizados correctamente .'.
+                  '</div></div>';           
+        $myController = new controller();
+        $myController->listadoUsuarios();	
+
+	}else{
+        require_once 'views/header.inc';
+	echo '<div class="container"><div class="alert alert-danger fade in">'.
+                      '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.
+                       '<strong>ERROR!</strong> Ocurrio un error, intentelo de nuevo.'.
+                  '</div></div>';
+        $myController = new controller();
+        $myController->listadoUsuarios();	
 	}
     }
 }

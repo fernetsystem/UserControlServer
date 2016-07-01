@@ -39,5 +39,14 @@ class model{
             return 0;
         }
     }
+    public function update_user($cuenta,$nombre,$paterno,$materno,$departamento,$nivelDeConfianza,$email,$tel,$ext){
+        $consulta=$this->db->query("update Usuarios set Nombre='$nombre', Paterno='$paterno', Materno='$materno', "
+                                . "Departamento='$departamento', NivelDeConfianza='$nivelDeConfianza', Email='$email', Telefono='$tel', Extencion='$ext' where idUsuario=$cuenta; ");                                
+        if($consulta>0){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 }
 ?>
