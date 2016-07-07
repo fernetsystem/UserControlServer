@@ -49,6 +49,12 @@ class controller{
         require_once 'views/usuarios.php';                                                          
         require_once 'views/footer.inc';
     }
+    public function buscarEquipo(){        
+        require_once 'views/header.inc';	
+        $datosEquipos = $this->myModel->search_machine($_REQUEST['palabra']);
+        require_once 'views/equipos.php';                                                          
+        require_once 'views/footer.inc';
+    }
     public function agregarUsuario(){            
        $datos = $this->myModel->add_user($_REQUEST['cuenta'],$_REQUEST['nombre'],$_REQUEST['paterno'],$_REQUEST['materno'],$_REQUEST['departamento'],$_REQUEST['nivelDeConfianza'],$_REQUEST['email'],$_REQUEST['tel'],$_REQUEST['ext']);
        if($datos > 0){

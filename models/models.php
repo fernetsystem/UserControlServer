@@ -30,6 +30,13 @@ class model{
         }
         return $this->myDataGet;
     }
+    public function search_machine($palabra){
+        $consulta=$this->db->query("select * from equipos t1 inner join usuarios t2 on t1.idusuario=t2.idusuario where Marca like '".$palabra."%' or Modelo like '".$palabra."%' or Serie like '".$palabra."%' or IdInventario like '".$palabra."%' or t1.IdUsuario like '".$palabra."%' or Nombre like '".$palabra."%' or Paterno like '".$palabra."%'  or Materno like '".$palabra."%'  ;");
+        while ($filas=$consulta->fetch_assoc()) {
+            $this->myDataGet[]=$filas;
+        }
+        return $this->myDataGet;
+    }
     public function add_user($cuenta,$nombre,$paterno,$materno,$departamento,$nivelDeConfianza,$email,$tel,$ext){        
         $consulta=$this->db->query("insert into usuarios values($cuenta,'$nombre','$paterno','$materno','$departamento','$nivelDeConfianza','$email','$tel','$ext');");
         if($consulta>0){
