@@ -174,5 +174,30 @@ class controller{
 	}
      
     }
+        public function eliminarEquipo(){        
+        $datos = $this->myModel->delete_machine($_REQUEST['idEquipos']);
+        if($datos > 0){
+        require_once 'views/header.inc';    
+        echo '<div class="container"><div class="alert alert-success fade in">'.
+                      '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.
+                       '<strong>Operacion exitosa!</strong> Equipo eliminado .'.
+                  '</div></div>';            
+         $myController = new controller();
+        $myController->listadoEquipos(); 
+
+  }else{
+    require_once 'views/header.inc';
+  echo '<div class="container"><div class="alert alert-danger fade in">'.
+                      '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.
+                       '<strong>ERROR!</strong> Ocurrio un error, intentelo de nuevo.'.
+                  '</div></div>';
+         $myController = new controller();
+        $myController->listadoEquipos();                   
+  }
+     
+    }
+
+    
+
 }
 ?>

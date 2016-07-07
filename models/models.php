@@ -95,5 +95,14 @@ class model{
             return 0;
         }
     }
+    
+    public function delete_machine($idEquipo){
+        $consulta=$this->db->query("delete from equipos where idEquipos=$idEquipo;");
+        if($consulta>0){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 }
 ?>
