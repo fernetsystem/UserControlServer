@@ -50,7 +50,7 @@ class model{
             $this->myDataGet[]=$filas;
         }
         return $this->myDataGet;
-    }
+    }    
     public function add_user($cuenta,$nombre,$paterno,$materno,$departamento,$nivelDeConfianza,$email,$tel,$ext){        
         $consulta=$this->db->query("insert into usuarios values($cuenta,'$nombre','$paterno','$materno','$departamento','$nivelDeConfianza','$email','$tel','$ext');");
         if($consulta>0){
@@ -76,6 +76,17 @@ class model{
             return 0;
         }
     }
+    public function update_machine($idEquipo,$marca,$modelo,$serie,$inv,$user,$hd,$ram,$procesador,$fechacompra,$fechagar){
+        $consulta=$this->db->query("update Equipos set Marca='$marca', Modelo='$modelo', Serie='$serie', "
+                                . "IdInventario='$inv', IdUsuario=$user, DiscoDuro='$hd', MemoriaRam='$ram',"
+                                . "Procesador='$procesador', FechaDeCompra='$fechacompra', VencimientoDeGarantia='$fechagar' where idEquipos=$idEquipo; ");                                
+        if($consulta>0){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
     public function delete_user($cuenta){
         $consulta=$this->db->query("delete from usuarios where idUsuario=$cuenta;");
         if($consulta>0){
